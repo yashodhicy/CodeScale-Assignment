@@ -7,6 +7,7 @@ import Profile from './screens/Profile';
 import Login from "./screens/Login";
 import { NavigationContainer } from '@react-navigation/native';
 import SignUp from './screens/SignUp';
+import { StyleSheet, View } from 'react-native';
 
 const Stack = createNativeStackNavigator();
 
@@ -22,6 +23,7 @@ const AppNavigator = () => {
   }, []);
 
   return (
+    <View style={styles.appContainer}>
     <NavigationContainer independent={true}>
       <Stack.Navigator initialRouteName={user ? 'Inside' : 'Login'} screenOptions={{ headerShown: false }}>
         {user ? (
@@ -37,7 +39,9 @@ const AppNavigator = () => {
         )}
       </Stack.Navigator>
     </NavigationContainer>
+    </View>
   );
+  
 };
 
 const InsideStack = createNativeStackNavigator();
@@ -52,3 +56,10 @@ const InsideLayout = () => {
 };
 
 export default AppNavigator;
+
+const styles = StyleSheet.create({
+    appContainer: {
+      flex: 1, // This ensures the container takes up the entire screen
+      backgroundColor: 'black', // Set the background color to black
+    },
+  });

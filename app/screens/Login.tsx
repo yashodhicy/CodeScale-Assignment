@@ -56,20 +56,22 @@ export default Login;
 
 const styles = StyleSheet.create({
     container : {
-        marginHorizontal:20,
         flex:1,
-        backgroundColor: "#0000"
+        backgroundColor: "#2a2a2a",
+        color: "#fff",
     },
     input: {
+        marginHorizontal:20,
         marginVertical:4,
         height: 50,
         borderWidth: 1,
         borderRadius: 4,
         padding: 10,
-        backgroundColor: '#fff'
+        backgroundColor: '#3d3d3d'
     },
     heading: {
         fontSize: 24,
+        color: '#fff',
         fontWeight: 'bold',
         textAlign: 'center',
         marginBottom:300,

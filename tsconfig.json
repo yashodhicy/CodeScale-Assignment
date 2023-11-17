@@ -1,4 +1,9 @@
 {
-  "compilerOptions": {},
+  "compilerOptions": {
+    "target": "esnext",
+    "module": "commonjs",
+    "jsx": "react",
+    "types": ["expo-router"]
+  },
   "extends": "expo/tsconfig.base"
 }

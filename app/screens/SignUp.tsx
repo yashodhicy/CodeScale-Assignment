@@ -1,34 +1,28 @@
-import React, { useState } from 'react';
-import { ActivityIndicator, Button, KeyboardAvoidingView, StyleSheet, Text, View } from "react-native"
-import { FIREBASE_AUTH } from '../../firebaseConfig';
-import { TextInput } from 'react-native-gesture-handler';
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
-const Login = () => {
+import React from "react";
+import { StyleSheet, Text, View } from "@bacons/react-views";
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "@firebase/auth";
+import { useState } from "react";
+import { ActivityIndicator, Button, KeyboardAvoidingView } from "react-native";
+import { TextInput } from "react-native-gesture-handler";
+import { FIREBASE_AUTH } from "../../firebaseConfig";
+import { useNavigation } from "expo-router";
+
+
+const SignUp = () => {
+
     const [email , setEmail] = useState('');
     const [password , setPassword] = useState('');
     const [loading, setLoading] = useState(false);
 
     const auth = FIREBASE_AUTH;
+    const navigation = useNavigation();
 
-    const signIn = async () => {
-        setLoading(true);
-        try {
-            const response = await signInWithEmailAndPassword(auth, email, password);
-            console.log(response);
-            alert(response);
-        } catch (err) {
-            console.log(err);
-            alert("signIn error" + err.message);
-        } finally {
-            setLoading(false);
-        }
-    };
+    const handleSignUp = async () => {
 
-    const signUp = async () => {
         setLoading(true);
         try {
             const response = await createUserWithEmailAndPassword(auth, email, password);
-            console.log(response);
+            console.log(auth);
         }catch (err) {
             console.log(err);
             alert("signUp error" + err.message);
@@ -37,6 +31,11 @@ const Login = () => {
         }
 
     };
+
+    const handleLogin = () => {
+        navigation.navigate('Login');
+      };
+
     return (
         <KeyboardAvoidingView behavior='padding' style={styles.container}>
         <View >
@@ -45,8 +44,8 @@ const Login = () => {
             <TextInput style={styles.input } secureTextEntry={true} value={password} placeholder='Password' autoCapitalize='none' onChangeText={(text)=>{setPassword(text)}} />  
             {loading ? <ActivityIndicator size="large" color="#0000f" /> : 
                 <>
-                <Button title="Login" onPress={() => signIn()} />
-                <Button title="Signup" onPress={() => signUp()} />
+                <Button title="Signup" onPress={handleSignUp} />
+                <Button title="Login" onPress={handleLogin} />
                 </>
             }
         </View>
@@ -54,8 +53,7 @@ const Login = () => {
     );
 }
 
-export default Login;
-
+export default SignUp;
 
 const styles = StyleSheet.create({
     container : {

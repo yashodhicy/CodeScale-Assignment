@@ -5,26 +5,44 @@ import { FIREBASE_AUTH } from "../firebaseConfig";
 import Characters from './screens/Characters';
 import Profile from './screens/Profile';
 import Login from "./screens/Login";
-import { NavigationContainer } from '@react-navigation/native';
 import SignUp from './screens/SignUp';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, View , Text } from 'react-native';
+import * as SplashScreen from 'expo-splash-screen';
 
 const Stack = createNativeStackNavigator();
 
+
 const AppNavigator = () => {
   const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
+
 
   useEffect(() => {
+    const setupSplashScreen = async () => {
+        try {
+          await SplashScreen.preventAutoHideAsync();
+          setTimeout(async () => {
+            await SplashScreen.hideAsync();
+          }, 4000);
+        } catch (error) {
+          console.error('Error setting up splash screen:', error);
+        }
+    };
+  
+    setupSplashScreen();
+
     const unsubscribe = onAuthStateChanged(FIREBASE_AUTH, (authUser) => {
       console.log('authUser', authUser);
       setUser(authUser);
+      setLoading(false);
     });
     return () => unsubscribe();
   }, []);
 
+
   return (
     <View style={styles.appContainer}>
-    <NavigationContainer independent={true}>
+    
       <Stack.Navigator initialRouteName={user ? 'Inside' : 'Login'} screenOptions={{ headerShown: false }}>
         {user ? (
           <>
@@ -38,7 +56,7 @@ const AppNavigator = () => {
 
         )}
       </Stack.Navigator>
-    </NavigationContainer>
+    
     </View>
   );
   
@@ -59,7 +77,7 @@ export default AppNavigator;
 
 const styles = StyleSheet.create({
     appContainer: {
-      flex: 1, // This ensures the container takes up the entire screen
-      backgroundColor: 'black', // Set the background color to black
+      flex: 1,
+      backgroundColor: 'black',
     },
   });

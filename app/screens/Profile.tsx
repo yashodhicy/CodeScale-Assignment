@@ -24,7 +24,7 @@ const Profile = () => {
   const handleLogout = async () => {
     try {
       await FIREBASE_AUTH.signOut();
-      navigation.navigate('Login');
+      navigation.navigate("Login");
       alert("Successfully Log out");
     } catch (error) {
       console.error("Error signing out:", error.message);
@@ -43,10 +43,7 @@ const Profile = () => {
         )}
       </View>
       <View style={styles.bottomTextContainer}>
-        <TouchableOpacity
-          onPress={handleLogout}
-          style={styles.buttons}
-        >
+        <TouchableOpacity onPress={handleLogout} style={styles.buttons}>
           <Text style={styles.buttonText}>Log out</Text>
         </TouchableOpacity>
       </View>
@@ -77,7 +74,7 @@ const styles = StyleSheet.create({
     color: "#fff",
     fontWeight: "bold",
     textAlign: "center",
-    marginBottom: 100,
+    marginBottom: "20%",
     marginTop: 20,
   },
   buttons: {

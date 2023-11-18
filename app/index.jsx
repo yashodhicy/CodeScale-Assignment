@@ -43,15 +43,15 @@ const AppNavigator = () => {
   return (
     <View style={styles.appContainer}>
     
-      <Stack.Navigator initialRouteName={user ? 'Inside' : 'Login'} screenOptions={{ headerShown: false }}>
+      <Stack.Navigator initialRouteName={user ? 'Inside' : 'Login'}  screenOptions={{ headerShown: false }}>
         {user ? (
           <>
             <Stack.Screen name="Inside" component={InsideLayout} />
           </>
         ) : (
         <>
-          <Stack.Screen name="Login" component={Login} />
-          <Stack.Screen name="Signup" component={SignUp} />
+          <Stack.Screen name="Login" component={Login} options={{ headerShown: false }} />
+          <Stack.Screen name="Signup" component={SignUp} options={{ headerShown: false }} />
         </>
 
         )}

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { StyleSheet, Text, View } from "@bacons/react-views";
-import { createUserWithEmailAndPassword,updateProfile } from "@firebase/auth";
+import { createUserWithEmailAndPassword, updateProfile } from "@firebase/auth";
 import { ActivityIndicator, Button, KeyboardAvoidingView } from "react-native";
 import { TextInput, TouchableOpacity } from "react-native-gesture-handler";
 import { FIREBASE_AUTH } from "../../firebaseConfig";
@@ -33,7 +33,11 @@ const SignUp = () => {
         return;
       }
 
-      const response = await createUserWithEmailAndPassword(auth, email, password);
+      const response = await createUserWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
 
       // Assuming you have a function to update the user's profile
       await updateProfile(response.user, { displayName: name });
@@ -110,7 +114,7 @@ const SignUp = () => {
           <Text style={styles.passwordRequirementsColumn}>
             Password requirements:
             {"\n"}
-            🔡 One lowercase character 
+            🔡 One lowercase character
             {"\n"}
             🔠 One uppercase character
           </Text>
@@ -168,7 +172,7 @@ const styles = StyleSheet.create({
     color: "#fff",
     fontWeight: "bold",
     textAlign: "center",
-    marginBottom:'40%',
+    marginBottom: "40%",
     marginTop: 20,
   },
   buttons: {
@@ -225,6 +229,6 @@ const styles = StyleSheet.create({
   passwordRequirementsColumn: {
     color: "white",
     flex: 1,
-    lineHeight: 22 
+    lineHeight: 22,
   },
 });

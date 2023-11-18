@@ -2,7 +2,7 @@ import { Text, View, Image } from "@bacons/react-views";
 import React, { useState, useEffect } from 'react';
 import { Button, StyleSheet } from "react-native";
 import { NavigationProp } from "@react-navigation/native";
-import { FlatList } from "react-native-gesture-handler";
+import { FlatList, TouchableOpacity } from "react-native-gesture-handler";
 import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
 import axios from 'axios';
 
@@ -35,9 +35,13 @@ const Characters: React.FC<RouterProps> = ({ navigation }) => {
   };
   return (
     <View>
-     <Button onPress={() => navigation.navigate('profile')} title="profile" style={styles.profile}>
-     <FontAwesomeIcon icon="fal fa-cog" />
-      </Button>
+     <TouchableOpacity onPress={() => navigation.navigate('profile')} style={styles.profile}>
+     <Image
+        source={require('../../assets/setting.png')}
+        style={styles.settingIcon}
+      />
+      </TouchableOpacity>
+
       <FlatList
         style={styles.container}
         data={characters}
@@ -63,16 +67,20 @@ export default Characters;
 
 const styles = StyleSheet.create({
   characterContainer: {
+    position:'relative',
     flexDirection: 'row',
     alignItems: 'center',
     padding: 10,
     borderBottomWidth: 1,
     borderBottomColor: '#ccc',
+    backgroundColor: "#2a2a2a",
+    zIndex:0,
   },
   characterImage: {
     width: 100,
     height: 100,
     marginRight: 10,
+    zIndex:0,
   },
   characterInfo: {
     flex: 1,
@@ -80,15 +88,31 @@ const styles = StyleSheet.create({
   fullName: {
     fontSize: 18,
     fontWeight: 'bold',
+    color: '#ffffff'
   },
   title: {
     fontSize: 16,
-    color: '#555',
-  },
-  profile: {
-    alignSelf: 'flex-end', 
+    color: '#ffffff',
   },
   container: {
     marginBottom: 35,
+    backgroundColor: "#2a2a2a",
+    position: 'relative',
+    zIndex: 0,
+  },
+  profile: {
+    flex:0,
+    top: 0,
+    right: 0,
+    alignItems: 'flex-end',
+    paddingRight: 10,
+    paddingTop: 10,
+    backgroundColor: "#2a2a2a",
+    zIndex: 2,
+  },
+
+  settingIcon: {
+    width: 30,  
+    height: 30, 
   }
 });

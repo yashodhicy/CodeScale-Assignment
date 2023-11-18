@@ -67,8 +67,8 @@ const InsideStack = createNativeStackNavigator();
 const InsideLayout = () => {
   return (
     <InsideStack.Navigator>
-      <InsideStack.Screen name="characters" component={Characters} />
-      <InsideStack.Screen name="profile" component={Profile} />    
+      <InsideStack.Screen name="characters" component={Characters} screenOptions={{ headerShown: false }} />
+      <InsideStack.Screen name="profile" component={Profile}  screenOptions={{ headerShown: false }}/>    
     </InsideStack.Navigator>
   );
 };

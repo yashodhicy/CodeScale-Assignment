@@ -5,7 +5,8 @@
       "bundler": "metro"
     },
     "plugins": [
-      "expo-router"
+      "expo-router",
+      "@react-native-voice/voice"
     ],
     "name": "CodeScale-Assignment",
     "slug": "CodeScale-Assignment",
@@ -13,7 +14,20 @@
       "image": "./assets/splash.png",
       "resizeMode": "contain",
       "backgroundColor": "#2a2a2a"
-      
+    },
+    "extra": {
+      "router": {
+        "origin": false
+      },
+      "eas": {
+        "projectId": "a1cc5518-4607-41a1-8827-8cfbd9d65855"
+      }
+    },
+    "android": {
+      "package": "codescaleassigfsd.fds"
+    },
+    "ios": {
+      "bundleIdentifier": "codescale.ios"
     }
   }
 }

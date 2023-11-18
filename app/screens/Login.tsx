@@ -112,7 +112,7 @@ const styles = StyleSheet.create({
     },
     bottomTextContainer: {
         position: 'absolute',
-        bottom: 5,
+        bottom: 10,
         width: '100%',
         padding: 10,
         height:60,

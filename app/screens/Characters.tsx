@@ -67,18 +67,20 @@ export default Characters;
 
 const styles = StyleSheet.create({
   characterContainer: {
+    position:'relative',
     flexDirection: 'row',
     alignItems: 'center',
     padding: 10,
     borderBottomWidth: 1,
     borderBottomColor: '#ccc',
     backgroundColor: "#2a2a2a",
-    zIndex:0
+    zIndex:0,
   },
   characterImage: {
     width: 100,
     height: 100,
     marginRight: 10,
+    zIndex:0,
   },
   characterInfo: {
     flex: 1,
@@ -95,16 +97,20 @@ const styles = StyleSheet.create({
   container: {
     marginBottom: 35,
     backgroundColor: "#2a2a2a",
+    position: 'relative',
+    zIndex: 0,
   },
   profile: {
     flex:0,
-    alignItems: 'flex-end',
     top: 0,
     right: 0,
+    alignItems: 'flex-end',
     paddingRight: 10,
     paddingTop: 10,
     backgroundColor: "#2a2a2a",
+    zIndex: 2,
   },
+
   settingIcon: {
     width: 30,  
     height: 30, 

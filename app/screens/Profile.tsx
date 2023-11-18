@@ -24,8 +24,8 @@ const Profile = () => {
   const handleLogout = async () => {
     try {
       await FIREBASE_AUTH.signOut();
-      // Navigate to the root page (Login)
       navigation.navigate('Login');
+      alert("Successfully Log out");
     } catch (error) {
       console.error("Error signing out:", error.message);
     }

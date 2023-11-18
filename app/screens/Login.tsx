@@ -20,8 +20,7 @@
             setLoading(true);
             try {
                 const response = await signInWithEmailAndPassword(auth, email, password);
-                console.log(response);
-                alert(response);
+                alert("Successfully Signed In");
             } catch (err) {
                 console.log(err);
                 alert("signIn error" + err.message);

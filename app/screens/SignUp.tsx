@@ -38,9 +38,8 @@ const SignUp = () => {
       // Assuming you have a function to update the user's profile
       await updateProfile(response.user, { displayName: name });
 
-      console.log(auth);
+      alert("Successfully Signed Up");
     } catch (err) {
-      console.log(err);
       alert("SignUp error: " + err.message);
     } finally {
       setLoading(false);

@@ -1,20 +1,18 @@
 import React, { useState } from "react";
 import { StyleSheet, Text, View } from "@bacons/react-views";
-import {
-  createUserWithEmailAndPassword,
-  signInWithEmailAndPassword,
-} from "@firebase/auth";
+import { createUserWithEmailAndPassword,updateProfile } from "@firebase/auth";
 import { ActivityIndicator, Button, KeyboardAvoidingView } from "react-native";
 import { TextInput, TouchableOpacity } from "react-native-gesture-handler";
 import { FIREBASE_AUTH } from "../../firebaseConfig";
 import { useNavigation } from "expo-router";
-import { updateProfile } from "firebase/auth";
+
 const SignUp = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [name, setName] = useState("");
   const [loading, setLoading] = useState(false);
+  const [passwordError, setPasswordError] = useState("");
 
   const auth = FIREBASE_AUTH;
   const navigation = useNavigation();
@@ -29,11 +27,13 @@ const SignUp = () => {
         return;
       }
 
-      const response = await createUserWithEmailAndPassword(
-        auth,
-        email,
-        password
-      );
+      // Check password strength
+      if (!isPasswordStrong(password)) {
+        alert("Password does not meet the strength requirements");
+        return;
+      }
+
+      const response = await createUserWithEmailAndPassword(auth, email, password);
 
       // Assuming you have a function to update the user's profile
       await updateProfile(response.user, { displayName: name });
@@ -48,6 +48,22 @@ const SignUp = () => {
 
   const handleLogin = () => {
     navigation.navigate("Login");
+  };
+
+  const isPasswordStrong = (password) => {
+    // Add your password strength criteria here
+    const hasLowerCase = /[a-z]/.test(password);
+    const hasUpperCase = /[A-Z]/.test(password);
+    const hasNumber = /\d/.test(password);
+    const hasMinLength = password.length >= 8;
+
+    setPasswordError(
+      !hasLowerCase || !hasUpperCase || !hasNumber || !hasMinLength
+        ? "Password must have at least one lowercase character, one uppercase character, one number, and be 8 characters minimum."
+        : ""
+    );
+
+    return hasLowerCase && hasUpperCase && hasNumber && hasMinLength;
   };
 
   return (
@@ -88,29 +104,42 @@ const SignUp = () => {
           autoCapitalize="none"
           onChangeText={(text) => setConfirmPassword(text)}
         />
+        <Text style={styles.errorText}>{passwordError}</Text>
+
+        <View style={styles.passwordRequirementsContainer}>
+          <Text style={styles.passwordRequirementsColumn}>
+            Password requirements:
+            {"\n"}
+            🔡 One lowercase character 
+            {"\n"}
+            🔠 One uppercase character
+          </Text>
+          <Text style={styles.passwordRequirementsColumn}>
+            {" "}
+            {"\n"}
+            🔢 One number
+            {"\n"}
+            ⚖️ 8 characters minimum
+          </Text>
+        </View>
 
         {loading ? (
           <ActivityIndicator size="large" color="#0000f" />
         ) : (
-            <TouchableOpacity
-              onPress={handleSignUp}
-              style={styles.buttons}
-            >
-              <Text style={styles.buttonText}>Signup</Text>
-            </TouchableOpacity>
+          <TouchableOpacity onPress={handleSignUp} style={styles.buttons}>
+            <Text style={styles.buttonText}>Signup</Text>
+          </TouchableOpacity>
         )}
-        </View>
+      </View>
 
-        <View style={styles.bottomTextContainer}>
-          <Text style={styles.bottomText}>
-            have an account? 
-            <TouchableOpacity
-              onPress={handleLogin}>
-              <Text style={styles.signinText}>Sign In</Text>
-            </TouchableOpacity>
-          </Text>
-        </View>
-      
+      <View style={styles.bottomTextContainer}>
+        <Text style={styles.bottomText}>
+          have an account?
+          <TouchableOpacity onPress={handleLogin}>
+            <Text style={styles.signinText}>Sign In</Text>
+          </TouchableOpacity>
+        </Text>
+      </View>
     </KeyboardAvoidingView>
   );
 };
@@ -139,7 +168,7 @@ const styles = StyleSheet.create({
     color: "#fff",
     fontWeight: "bold",
     textAlign: "center",
-    marginBottom: 300,
+    marginBottom:'40%',
     marginTop: 20,
   },
   buttons: {
@@ -182,5 +211,20 @@ const styles = StyleSheet.create({
     textAlign: "center",
     textDecorationLine: "underline",
     fontWeight: "bold",
+  },
+  errorText: {
+    color: "red",
+    marginHorizontal: 20,
+    marginTop: 5,
+  },
+  passwordRequirementsContainer: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    marginHorizontal: 20,
+  },
+  passwordRequirementsColumn: {
+    color: "white",
+    flex: 1,
+    lineHeight: 22 
   },
 });

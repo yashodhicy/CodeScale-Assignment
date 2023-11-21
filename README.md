@@ -32,8 +32,9 @@
 
 > This React Native application, "GOT Characters App," is a mobile application that provides a seamless experience for users to explore characters from the popular television series "Game of Thrones." The app integrates Firebase authentication and a Firebase database to enhance user experience and ensure secure sign-up and sign-in processes.
 
-## [Link to the Demo](https://drive.google.com/file/d/19NMkbEBlCajmefoSIeJvkVbDtIeH61u5/view?usp=drive_link)
+ [Link to the Demo](https://drive.google.com/file/d/19NMkbEBlCajmefoSIeJvkVbDtIeH61u5/view?usp=drive_link)
 
+## SCREENSHOTS
 <p align="center">
   <img src="./assets/signup.jpg" alt="Characters" width="200"/>
   <img src="./assets/charactors.jpg" alt="Sign Up" width="200"/>
